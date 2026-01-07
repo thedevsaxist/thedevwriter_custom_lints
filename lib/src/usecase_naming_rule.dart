@@ -1,6 +1,7 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
+import 'utils/generated_files.dart';
 
 class UsecaseNamingRule extends DartLintRule {
   const UsecaseNamingRule()
@@ -14,6 +15,8 @@ class UsecaseNamingRule extends DartLintRule {
 
   @override
   void run(CustomLintResolver resolver, DiagnosticReporter reporter, CustomLintContext context) {
+    if (isGeneratedFile(resolver)) return;
+
     final path = resolver.path;
 
     if (!path.contains('/usecases/')) return;

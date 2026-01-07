@@ -1,6 +1,8 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
+import 'utils/generated_files.dart';
+
 class ReqResModelNamingRule extends DartLintRule {
   const ReqResModelNamingRule()
     : super(
@@ -13,6 +15,8 @@ class ReqResModelNamingRule extends DartLintRule {
 
   @override
   void run(CustomLintResolver resolver, DiagnosticReporter reporter, CustomLintContext context) {
+    if (isGeneratedFile(resolver)) return;
+
     final path = resolver.path.replaceAll('\\', '/');
 
     if (!path.contains('/models/')) return;
