@@ -1,7 +1,7 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-import 'utils/generated_files.dart';
+import '../utils/generated_files.dart';
 
 class ReqResModelNamingRule extends DartLintRule {
   const ReqResModelNamingRule()
