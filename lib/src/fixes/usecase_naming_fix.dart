@@ -41,11 +41,19 @@ class UsecaseNamingFix extends DartAssist {
     String oldName,
     String newName,
   ) {
+    final ranges = <SourceRange>[];
+
     root.visitChildren(
       _ClassReferenceVisitor(oldName, (SourceRange range) {
-        builder.addSimpleReplacement(range, newName);
+        ranges.add(range);
       }),
     );
+    
+    // Apply replacements in reverse order to avoid offset issues
+    ranges.sort((a, b) => b.offset.compareTo(a.offset));
+    for (final range in ranges) {
+      builder.addSimpleReplacement(range, newName);
+    }
   }
 }
 
